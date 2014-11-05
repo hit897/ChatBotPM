@@ -16,7 +16,6 @@ public class ChatBotAppController
 {
 	private ChatBotView applicationView;
 	private Chatbot mySillyChatbot;
-<<<<<<< HEAD
 	private String startMessage;
 	private String quitMessage;
 	/**
@@ -30,16 +29,10 @@ public class ChatBotAppController
 	 * 
 	 * @author BrandonHicken
 	 * @version 1.2 10/2/14 - Cleaned the quit method. :/
-=======
-	
-	/**
-	 * This just makes the chatbot.
->>>>>>> origin/master
 	 */
 	public ChatBotAppController()
 	{
 		applicationView = new ChatBotView(this);
-<<<<<<< HEAD
 		appFrame = new ChatbotFrame(this);
 		mySillyChatbot = new Chatbot("Derf");
 		startMessage = "Welcome to the " + mySillyChatbot.getname() + " chatbot. What is your name?";
@@ -51,17 +44,11 @@ public class ChatBotAppController
 		return mySillyChatbot;
 	}
 
-=======
-		mySillyChatbot = new Chatbot("Derf");
-	}
-	
->>>>>>> origin/master
 	/**
 	 * This starts Everything.
 	 */
 	public void start()
 	{
-<<<<<<< HEAD
 		((ChatbotPanel) appFrame.getContentPane()).showTextMessage(startMessage);
 
 		// ChatbotPanel testPanel = (ChatbotPanel) appFrame.getContentPane();
@@ -83,20 +70,6 @@ public class ChatBotAppController
 	 * This is how the program quits.
 	 */
 	public void quit()
-=======
-		String result = applicationView.showChatbot("Nerd");
-				
-				if (mySillyChatbot.quitChecker(result))
-				{
-					quit();
-				}
-	}
-	
-	/**
-	 * This is how the program quits.
-	 */
-	private void quit()
->>>>>>> origin/master
 	{
 		applicationView.showChatbotMessage(quitMessage);
 		System.exit(0);
