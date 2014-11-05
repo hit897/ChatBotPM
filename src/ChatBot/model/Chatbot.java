@@ -1,5 +1,6 @@
 package ChatBot.model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 /**
@@ -7,6 +8,12 @@ import java.util.ArrayList;
  * 
  * @author Brandon
  * @version 9/26/14
+=======
+/**
+ * The Chatbot is used for checking and manipulating Strings.
+ * @author Brandon
+ *@version 9/26/14
+>>>>>>> origin/master
  */
 public class Chatbot
 {
@@ -15,6 +22,7 @@ public class Chatbot
 	private ArrayList<String> memeList;
 	private String name;
 	private int chatCount;
+<<<<<<< HEAD
 
 	private ChatbotUser myUser;
 
@@ -24,6 +32,12 @@ public class Chatbot
 	 * 
 	 * @param name
 	 *            The supplied name for the Chatbot.
+=======
+	
+	/**
+	 * The constructor constructs a Chatbot object with the supplied name, and initializes the number of chats to zero.
+	 * @param name The supplied name for the Chatbot.
+>>>>>>> origin/master
 	 */
 	public Chatbot(String name)
 	{
@@ -32,6 +46,7 @@ public class Chatbot
 		chatCount = 0;
 		fillTheMemeList();
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Returns the name of the Chatbot Object.
@@ -39,10 +54,20 @@ public class Chatbot
 	 * @return The current name of the Chatbot
 	 */
 
+=======
+	
+	
+	/**
+	 * Returns the name of the Chatbot Object.
+	 * @return The current name of the Chatbot
+	 */
+	
+>>>>>>> origin/master
 	public String getname()
 	{
 		return name;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * It get's the chat count.
@@ -69,11 +94,27 @@ public class Chatbot
 	 * 
 	 * @param name
 	 *            The name Chatbot gets set to. The new name of the ChatBot.
+=======
+	
+	/**
+	 * It get's the chat count.
+	 * @return
+	 */
+	public int gethatCount()
+	{
+		return chatCount;
+	}
+	
+	/**
+	 * This set's Chatbot's name.
+	 * @param name The name Chatbot gets set to.
+>>>>>>> origin/master
 	 */
 	public void setName(String name)
 	{
 		this.name = name;
 	}
+<<<<<<< HEAD
 
 	private void fillTheMemeList()
 	{
@@ -161,6 +202,9 @@ public class Chatbot
 		return result;
 	}
 
+=======
+	
+>>>>>>> origin/master
 	/**
 	 * This updates the ChatCount, AKA the number of times you've chatted.
 	 */
@@ -168,6 +212,7 @@ public class Chatbot
 	{
 		chatCount++;
 	}
+<<<<<<< HEAD
 
 	private boolean memeChecker(String input)
 	{
@@ -227,6 +272,18 @@ public class Chatbot
 		boolean oktoQuit = false;
 
 		if (input.equalsIgnoreCase("exit"))
+=======
+	/**
+	 * This is what checks if it's ok to for the program to quit, by checking the input.
+	 * @param input This is the input from the textbox.
+	 * @return True or False.  True for "exit" "yes" or "quit".
+	 */
+	public boolean quitChecker(String input)
+	{
+		boolean oktoQuit = false;
+		
+		if(input.equalsIgnoreCase("exit"))
+>>>>>>> origin/master
 		{
 			oktoQuit = true;
 		}
@@ -234,7 +291,11 @@ public class Chatbot
 		{
 			oktoQuit = true;
 		}
+<<<<<<< HEAD
 		if (input.equalsIgnoreCase("quit"))
+=======
+		if(input.equalsIgnoreCase("quit"))
+>>>>>>> origin/master
 		{
 			oktoQuit = true;
 		}
