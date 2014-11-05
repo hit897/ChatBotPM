@@ -16,6 +16,8 @@ public class Chatbot
 	private String name;
 	private int chatCount;
 
+	private ChatbotUser myUser;
+
 	/**
 	 * The constructor constructs a Chatbot object with the supplied name, and
 	 * initializes the number of chats to zero.
@@ -47,9 +49,19 @@ public class Chatbot
 	 * 
 	 * @return
 	 */
-	public int gethatCount()
+	public int getChatCount()
 	{
 		return chatCount;
+	}
+
+	public ChatbotUser getMyUser()
+	{
+		return myUser;
+	}
+
+	public void setMyUser(ChatbotUser myUser)
+	{
+		this.myUser = myUser;
 	}
 
 	/**
@@ -82,10 +94,16 @@ public class Chatbot
 	 *            The supplied text.
 	 * @return The processed text based on checker.
 	 */
-	public String processText(String currentInput)
+	public String processText(String TextBoxInput)
 	{
-		String result = "";
+		String currentInput = TextBoxInput;
+		String result = "Didn't work...";
 
+		if(getChatCount() < 7)
+		{
+			
+		}
+		
 		int randomPosition = (int) (Math.random() * 3);
 
 		if (currentInput != null && currentInput.length() > 0)
@@ -112,6 +130,17 @@ public class Chatbot
 					result = "different content";
 				}
 			}
+			else if (randomPosition == 2)
+			{
+				if (contentChecker(currentInput))
+				{
+					//Talk about the USER.
+				}
+				else
+				{
+					// Talk about the USER.
+				}
+			}
 			else
 			{
 				if (memeChecker(currentInput))
@@ -128,6 +157,7 @@ public class Chatbot
 		{
 			result = "Don't just hit ok!";
 		}
+		updateChatCount();
 		return result;
 	}
 
@@ -165,9 +195,11 @@ public class Chatbot
 		}
 		return isfour;
 	}
+
 	/**
 	 * 
-	 * @param input This is the input from the textbox.
+	 * @param input
+	 *            This is the input from the textbox.
 	 * @return It returns True if it contains what we said it did.
 	 */
 	private boolean contentChecker(String input)
