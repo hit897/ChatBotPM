@@ -10,7 +10,7 @@ import ChatBot.view.ChatbotPanel;
 /**
  * 
  * @author Brandon
- * @version 1.1
+ * @version 1.2 10/2/14
  */
 public class ChatBotAppController
 {
@@ -26,9 +26,6 @@ public class ChatBotAppController
 	/**
 	 * Runs the Chatbot Project. Owns the Model and the Views. This just makes
 	 * the chatbot.
-	 * 
-	 * @author BrandonHicken
-	 * @version 1.2 10/2/14 - Cleaned the quit method. :/
 	 */
 	public ChatBotAppController()
 	{

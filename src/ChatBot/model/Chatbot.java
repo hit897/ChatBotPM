@@ -15,8 +15,8 @@ public class Chatbot
 	private ArrayList<String> memeList;
 	private String name;
 	private int chatCount;
-
 	private ChatbotUser myUser;
+	private ArrayList<String> userInputList;
 
 	/**
 	 * The constructor constructs a Chatbot object with the supplied name, and
@@ -28,6 +28,7 @@ public class Chatbot
 	public Chatbot(String name)
 	{
 		memeList = new ArrayList<String>();
+		userInputList = new ArrayList<String>();
 		this.name = name;
 		chatCount = 0;
 		fillTheMemeList();
@@ -104,7 +105,7 @@ public class Chatbot
 			
 		}
 		
-		int randomPosition = (int) (Math.random() * 3);
+		int randomPosition = (int) (Math.random() * 6);
 
 		if (currentInput != null && currentInput.length() > 0)
 		{
@@ -141,7 +142,7 @@ public class Chatbot
 					// Talk about the USER.
 				}
 			}
-			else
+			else if (randomPosition == 3)
 			{
 				if (memeChecker(currentInput))
 				{
@@ -152,6 +153,19 @@ public class Chatbot
 					result = "not a meme, try again";
 				}
 			}
+			else if (randomPosition == 4)
+			{
+				//Add to our list
+				userInputList.add(currentInput);
+			}
+			else if (randomPosition == 5)
+			{
+				//List checker and removal
+			}
+			else
+			{
+				//Not Possible
+			}
 		}
 		else
 		{
@@ -159,6 +173,22 @@ public class Chatbot
 		}
 		updateChatCount();
 		return result;
+	}
+	
+	private boolean userInputChecker(String userInput)
+	{
+		boolean matchesInput = false;
+		
+		for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
+		{
+			if(userInput.equalsIgnoreCase(userInputList.get(loopCount)))
+			{
+				matchesInput = true;
+				userInputList.remove(loopCount);
+				loopCount--;
+			}
+		}
+		return matchesInput;
 	}
 
 	/**
