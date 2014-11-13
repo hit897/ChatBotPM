@@ -98,17 +98,26 @@ public class Chatbot
 	public String processText(String TextBoxInput)
 	{
 		String currentInput = TextBoxInput;
-		String result = "Didn't work...";
+		String result = "Things didn't work out the way they should've...IT'S BORKED.";
 
 		if(getChatCount() < 7)
 		{
-			
+			//ask Questions about all data members
+			if(getChatCount() == 0)
+			{
+				myUser.setUserName(currentInput);
+				result = "Good Name";
+			}
+			else if(getChatCount() == 1)
+			{
+				int userAge = Integer.parseInt(currentInput);
+				myUser.setAge(userAge);
+			}
+			//Continue for other user info fields.
 		}
-		
-		int randomPosition = (int) (Math.random() * 6);
-
-		if (currentInput != null && currentInput.length() > 0)
+		else if (currentInput != null && currentInput.length() > 0)
 		{
+			int randomPosition = (int) (Math.random() * 6);
 			if (randomPosition == 0)
 			{
 				if (lengthChecker(currentInput))

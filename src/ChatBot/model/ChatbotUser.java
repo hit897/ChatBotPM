@@ -31,12 +31,12 @@ public class ChatbotUser
 		return age;
 	}
 
-	public boolean isHasTattoos()
+	public boolean getHasTattoos()
 	{
 		return hasTattoos;
 	}
 
-	public boolean isNeedsCorrectiveLenses()
+	public boolean getNeedsCorrectiveLenses()
 	{
 		return needsCorrectiveLenses;
 	}
