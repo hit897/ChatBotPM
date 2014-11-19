@@ -32,6 +32,7 @@ public class Chatbot
 		this.name = name;
 		chatCount = 0;
 		fillTheMemeList();
+		myUser = new ChatbotUser();
 	}
 
 	/**
@@ -95,18 +96,17 @@ public class Chatbot
 	 *            The supplied text.
 	 * @return The processed text based on checker.
 	 */
-	public String processText(String TextBoxInput)
+	public String processText(String currentInput)
 	{
-		String input = TextBoxInput;
 		String result = "Things didn't work out the way they should've...IT'S BORKED.";
 
-		if (getChatCount() < 5)
+		if (getChatCount() < 2)
 		{
-			result = introduceUser(input);
+			result = introduceUser(currentInput);
 		}
-		else if (input != null && input.length() > 0)
+		else if (currentInput != null && currentInput.length() > 0)
 		{
-			result = randomChatConversation(input);
+			result = randomChatConversation(currentInput);
 		}
 		else
 		{
@@ -125,13 +125,15 @@ public class Chatbot
 		if (getChatCount() == 0)
 		{
 			myUser.setUserName(input);
-			userQuestion = "Good Name";
+			userQuestion = "Good Name.  How old are you?";
+			
 		}
 		
 		else if (getChatCount() == 1)
 		{
 			int userAge = Integer.parseInt(input);
 			myUser.setAge(userAge);
+			userQuestion = "HOLD THE PHONE.  You're Pretty Old!";
 		}
 
 		return userQuestion;
@@ -140,7 +142,10 @@ public class Chatbot
 	private String randomChatConversation(String input)
 	{
 		String conversation = "";
+		
+		
 		int randomPosition = (int) (Math.random() * 6);
+		
 		if (randomPosition == 0)
 		{
 			if (lengthChecker(input))
@@ -192,7 +197,14 @@ public class Chatbot
 		}
 		else if (randomPosition == 5)
 		{
-			// List checker and removal
+			if (userInputChecker(input))
+			{
+				conversation = "That was nice - you REMOVED IT FROM THE LIST.";
+			}
+			else
+			{
+				conversation = "Hey, that wasn't in the conversation before...";
+			}
 		}
 		else
 		{
@@ -201,6 +213,30 @@ public class Chatbot
 		return conversation;
 	}
 	
+	private String userTopic(String userInput)
+	{
+		String userBasedResponse = "";
+		
+		int randomUserTopic = (int) (Math.random() * 6);
+		
+		switch(randomUserTopic)
+		{
+		
+			case 1:
+				userBasedResponse = myUser.getAge() + "";
+				break;
+			case 0:
+				
+				break;
+			default:
+				break;
+				
+				
+		}
+		
+		
+		return userBasedResponse;
+	}
 	
 	private boolean userInputChecker(String userInput)
 	{

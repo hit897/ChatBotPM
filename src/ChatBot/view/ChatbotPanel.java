@@ -94,6 +94,6 @@ public class ChatbotPanel extends JPanel
 	
 	public void showTextMessage(String userInput)
 	{
-		chatArea.append("\n" + userInput + "\n");
+		chatArea.append("\n" + userInput);
 	}
 }
