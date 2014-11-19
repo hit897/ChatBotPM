@@ -26,6 +26,7 @@ public class ChatbotPanel extends JPanel
 		firstButton.setBackground(new Color(224, 255, 255));
 		firstTextField = new JTextField(25);
 		firstTextField.setBackground(new Color(224, 255, 255));
+		firstTextField.requestFocus();
 		baseLayout = new SpringLayout();
 
 		chatArea = new JTextArea(5, 5);

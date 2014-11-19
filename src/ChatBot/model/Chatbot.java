@@ -97,100 +97,118 @@ public class Chatbot
 	 */
 	public String processText(String TextBoxInput)
 	{
-		String currentInput = TextBoxInput;
+		String input = TextBoxInput;
 		String result = "Things didn't work out the way they should've...IT'S BORKED.";
 
-		if(getChatCount() < 7)
+		if (getChatCount() < 5)
 		{
-			//ask Questions about all data members
-			if(getChatCount() == 0)
-			{
-				myUser.setUserName(currentInput);
-				result = "Good Name";
-			}
-			else if(getChatCount() == 1)
-			{
-				int userAge = Integer.parseInt(currentInput);
-				myUser.setAge(userAge);
-			}
-			//Continue for other user info fields.
+			result = introduceUser(input);
 		}
-		else if (currentInput != null && currentInput.length() > 0)
+		else if (input != null && input.length() > 0)
 		{
-			int randomPosition = (int) (Math.random() * 6);
-			if (randomPosition == 0)
-			{
-				if (lengthChecker(currentInput))
-				{
-					result = "Woot!  YOU KNOW MY SECRETS??";
-				}
-				else
-				{
-					result = "That's not my secret. :/";
-				}
-			}
-			else if (randomPosition == 1)
-			{
-				if (contentChecker(currentInput))
-				{
-					result = "Hey!! I love Mistborn!";
-				}
-				else
-				{
-					result = "different content";
-				}
-			}
-			else if (randomPosition == 2)
-			{
-				if (contentChecker(currentInput))
-				{
-					//Talk about the USER.
-				}
-				else
-				{
-					// Talk about the USER.
-				}
-			}
-			else if (randomPosition == 3)
-			{
-				if (memeChecker(currentInput))
-				{
-					result = "WOW! " + currentInput + " IS ONE OF MA FAV MEMES!";
-				}
-				else
-				{
-					result = "not a meme, try again";
-				}
-			}
-			else if (randomPosition == 4)
-			{
-				//Add to our list
-				userInputList.add(currentInput);
-			}
-			else if (randomPosition == 5)
-			{
-				//List checker and removal
-			}
-			else
-			{
-				//Not Possible
-			}
+			result = randomChatConversation(input);
 		}
 		else
 		{
 			result = "Don't just hit ok!";
+			chatCount --;
 		}
 		updateChatCount();
 		return result;
 	}
+
+	private String introduceUser(String input)
+	{
+		String userQuestion = "";
+
+		// ask Questions about all data members
+		if (getChatCount() == 0)
+		{
+			myUser.setUserName(input);
+			userQuestion = "Good Name";
+		}
+		
+		else if (getChatCount() == 1)
+		{
+			int userAge = Integer.parseInt(input);
+			myUser.setAge(userAge);
+		}
+
+		return userQuestion;
+	}
+
+	private String randomChatConversation(String input)
+	{
+		String conversation = "";
+		int randomPosition = (int) (Math.random() * 6);
+		if (randomPosition == 0)
+		{
+			if (lengthChecker(input))
+			{
+				conversation = "Woot!  YOU KNOW MY SECRETS??";
+			}
+			else
+			{
+				conversation = "That's not my secret. :/";
+			}
+		}
+		else if (randomPosition == 1)
+		{
+			if (contentChecker(input))
+			{
+				conversation = "Hey!! I love Mistborn!";
+			}
+			else
+			{
+				conversation = "different content";
+			}
+		}
+		else if (randomPosition == 2)
+		{
+			if (contentChecker2(input))
+			{
+				// Talk about the USER.
+			}
+			else
+			{
+				// Talk about the USER.
+			}
+		}
+		else if (randomPosition == 3)
+		{
+			if (memeChecker(input))
+			{
+				conversation = "WOW! " + input + " IS ONE OF MA FAV MEMES!";
+			}
+			else
+			{
+				conversation = "not a meme, try again";
+			}
+		}
+		else if (randomPosition == 4)
+		{
+			// Add to our list
+			userInputList.add(input);
+		}
+		else if (randomPosition == 5)
+		{
+			// List checker and removal
+		}
+		else
+		{
+			// Not Possible
+		}
+		return conversation;
+	}
+	
 	
 	private boolean userInputChecker(String userInput)
 	{
 		boolean matchesInput = false;
-		
-		for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
+
+		for (int loopCount = 0; loopCount < userInputList.size(); loopCount++)
 		{
-			if(userInput.equalsIgnoreCase(userInputList.get(loopCount)))
+			if (userInput.equalsIgnoreCase(userInputList.get(loopCount)))
 			{
 				matchesInput = true;
 				userInputList.remove(loopCount);
@@ -250,6 +268,17 @@ public class Chatbot
 			doescontain = true;
 		}
 		return doescontain;
+	}
+
+	private boolean contentChecker2(String input)
+	{
+		boolean isUser = false;
+
+		if (input.equalsIgnoreCase("User"))
+		{
+			isUser = true;
+		}
+		return isUser;
 	}
 
 	/**
