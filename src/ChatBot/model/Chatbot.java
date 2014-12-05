@@ -55,12 +55,18 @@ public class Chatbot
 	{
 		return chatCount;
 	}
-
+	/**
+	 * It's a get method for MyUser
+	 * @return
+	 */
 	public ChatbotUser getMyUser()
 	{
 		return myUser;
 	}
-
+	/**
+	 * It's a set method for MyUser.  Sets myUser to "myUser".
+	 * @param myUser
+	 */
 	public void setMyUser(ChatbotUser myUser)
 	{
 		this.myUser = myUser;
@@ -68,15 +74,17 @@ public class Chatbot
 
 	/**
 	 * This set's Chatbot's name.
-	 * 
+	 * "name" is the new name of the ChatBot.
 	 * @param name
-	 *            The name Chatbot gets set to. The new name of the ChatBot.
+	 * 
 	 */
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-
+	/**
+	 * This fills the Array called MemeList.
+	 */
 	private void fillTheMemeList()
 	{
 		memeList.add("Kitties");
@@ -111,12 +119,16 @@ public class Chatbot
 		else
 		{
 			result = "Don't just hit ok!";
-			chatCount --;
+			chatCount--;
 		}
 		updateChatCount();
 		return result;
 	}
-
+	/**
+	 * Introducing the user, just talks about what they're saying about themselves.
+	 * @param input
+	 * @return
+	 */
 	private String introduceUser(String input)
 	{
 		String userQuestion = "";
@@ -126,9 +138,9 @@ public class Chatbot
 		{
 			myUser.setUserName(input);
 			userQuestion = "Good Name.  How old are you?";
-			
+
 		}
-		
+
 		else if (getChatCount() == 1)
 		{
 			int userAge = Integer.parseInt(input);
@@ -142,10 +154,9 @@ public class Chatbot
 	private String randomChatConversation(String input)
 	{
 		String conversation = "";
-		
-		
-		int randomPosition = (int) (Math.random() * 6);
-		
+
+		int randomPosition = (int) (Math.random() * 7);
+
 		if (randomPosition == 0)
 		{
 			if (lengthChecker(input))
@@ -172,11 +183,11 @@ public class Chatbot
 		{
 			if (contentChecker2(input))
 			{
-				// Talk about the USER.
+				conversation = "Yes, sir, you are the user...";
 			}
 			else
 			{
-				// Talk about the USER.
+				conversation = "I think you meant to say something about being \"The User\" ";
 			}
 		}
 		else if (randomPosition == 3)
@@ -194,6 +205,7 @@ public class Chatbot
 		{
 			// Add to our list
 			userInputList.add(input);
+			conversation = "Added to the list...";
 		}
 		else if (randomPosition == 5)
 		{
@@ -206,38 +218,90 @@ public class Chatbot
 				conversation = "Hey, that wasn't in the conversation before...";
 			}
 		}
+		else if (randomPosition == 6)
+		{
+			if (mashChecker(input))
+			{
+				conversation = mashingDetected(input);
+			}
+			else
+			{
+				conversation = noMashingDetected(input);
+			}
+		}
 		else
 		{
-			// Not Possible
+			conversation = "not...possible...";
 		}
 		return conversation;
 	}
-	
+
+	private String mashingDetected(String input)
+	{
+		String mashed = "";
+
+		mashed = input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+		mashed += input.substring(input.length() / 2);
+
+		return mashed;
+	}
+
+	private String noMashingDetected(String input)
+	{
+		String noMashing = "Thanks for not mashing your keyboard, N00b";
+
+		if (input.length() > 1)
+		{
+			noMashing += input.substring(input.length() / 3, input.length() / 2);
+		}
+
+		return noMashing;
+	}
+
 	private String userTopic(String userInput)
 	{
 		String userBasedResponse = "";
-		
+
 		int randomUserTopic = (int) (Math.random() * 6);
-		
-		switch(randomUserTopic)
+
+		switch (randomUserTopic)
 		{
-		
-			case 1:
-				userBasedResponse = myUser.getAge() + "";
-				break;
-			case 0:
-				
-				break;
-			default:
-				break;
-				
-				
+
+		case 1:
+			userBasedResponse = myUser.getAge() + "";
+			break;
+		case 0:
+
+			break;
+		default:
+			break;
+
 		}
-		
-		
+
 		return userBasedResponse;
 	}
-	
+
 	private boolean userInputChecker(String userInput)
 	{
 		boolean matchesInput = false;
@@ -282,7 +346,7 @@ public class Chatbot
 	{
 		boolean isfour = false;
 
-		if (input.length() >= 20)
+		if (input.length() <= 20)
 		{
 			isfour = true;
 		}
@@ -317,6 +381,18 @@ public class Chatbot
 		return isUser;
 	}
 
+	private boolean mashChecker(String input)
+	{
+		boolean isMashing = false;
+
+		if (input.indexOf("jkl") > -1)
+		{
+			isMashing = true;
+		}
+
+		return isMashing;
+	}
+
 	/**
 	 * This is what checks if it's ok to for the program to quit, by checking
 	 * the input.
@@ -325,7 +401,6 @@ public class Chatbot
 	 *            This is the input from the textbox.
 	 * @return True or False. True for "exit" "yes" or "quit".
 	 */
-
 	public boolean quitChecker(String input)
 	{
 		boolean oktoQuit = false;
@@ -345,3 +420,5 @@ public class Chatbot
 		return oktoQuit;
 	}
 }
+
+
