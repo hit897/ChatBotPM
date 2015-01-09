@@ -14,6 +14,8 @@ public class ChatbotPanel extends JPanel
 
 	private JTextField firstTextField;
 	private JButton firstButton;
+	private JButton saveButton;
+	private JButton loadButton;
 	private SpringLayout baseLayout;
 	private JTextArea chatArea;
 	private JScrollPane chatPane;
@@ -23,12 +25,13 @@ public class ChatbotPanel extends JPanel
 		this.baseController = baseController;
 
 		firstButton = new JButton("Click the Button... It's SO CLICKY.");
+		saveButton = new JButton("save");
+		loadButton = new JButton("load");
 		firstButton.setBackground(new Color(224, 255, 255));
 		firstTextField = new JTextField(25);
 		firstTextField.setBackground(new Color(224, 255, 255));
 		firstTextField.requestFocus();
 		baseLayout = new SpringLayout();
-
 		chatArea = new JTextArea(5, 5);
 		chatPane = new JScrollPane(chatArea);
 		chatArea.setBackground(new Color(175, 238, 238));
@@ -55,6 +58,8 @@ public class ChatbotPanel extends JPanel
 		this.setSize(400, 400);
 		this.setLayout(baseLayout);
 		this.add(firstButton);
+		this.add(saveButton);
+		this.add(loadButton);
 		this.add(firstTextField);
 		this.add(chatPane);
 	}
@@ -71,6 +76,9 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, firstTextField, 0, SpringLayout.EAST, firstButton);
 		baseLayout.putConstraint(SpringLayout.WEST, firstButton, 92, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, -25, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, loadButton);
+		baseLayout.putConstraint(SpringLayout.WEST, saveButton, 0, SpringLayout.WEST, loadButton);
+
 	}
 
 	private void setupListeners()
@@ -90,6 +98,33 @@ public class ChatbotPanel extends JPanel
 				
 			}
 		});
+
+		saveButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String chat = chatArea.getText();
+				baseController.saveText(chat, true);;
+			}
+		});
+		
+		loadButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String savedChat = baseController.readTextFromFile();
+				if(savedChat.length()<1)
+				{
+					chatArea.setText("No Text in the File...");
+				}
+				else
+				{
+					chatArea.setText(savedChat);
+				}
+			}
+		});
+		
+				
 	}
 	
 	public void showTextMessage(String userInput)

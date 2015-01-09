@@ -1,0 +1,8 @@
+
+Welcome to the Derf chatbot. What is your name?
+User: asdfgoasg
+Chatbot: Good Name.  How old are you?
+User: 6
+Chatbot: HOLD THE PHONE.  You're Pretty Old!
+User: sadf
+Chatbot: I think you meant to say something about being "The User" 

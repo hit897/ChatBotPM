@@ -1,5 +1,13 @@
 package ChatBot.Controller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 import ChatBot.model.Chatbot;
@@ -72,4 +80,70 @@ public class ChatBotAppController
 		System.exit(0);
 	}
 
+	public void saveText(String conversation, boolean appendToEnd)
+	{
+		String fileName = "C:/Saved Chats/Text.txt";
+		
+		PrintWriter outputWriter;
+		
+		
+		if(appendToEnd)
+		{
+			try
+			{
+				outputWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName, appendToEnd)));
+				outputWriter.append(conversation);
+				outputWriter.close();
+			}
+			catch(FileNotFoundException noExistingFile)
+			{
+				JOptionPane.showMessageDialog(appFrame, "There isn't a file there...");
+				JOptionPane.showMessageDialog(appFrame, noExistingFile.getMessage());
+			}
+			catch (IOException inputOutputError)
+			{
+				JOptionPane.showMessageDialog(appFrame, "There isn't a file there...");
+				JOptionPane.showMessageDialog(appFrame, inputOutputError.getMessage());
+			}
+		}
+		else
+		{
+			try
+			{
+				outputWriter = new PrintWriter(fileName);
+				outputWriter.println(conversation);
+				outputWriter.close();
+			}
+			catch(FileNotFoundException noFileIsThere)
+			{
+				JOptionPane.showMessageDialog(appFrame, "There isn't a file there...");
+			}
+		}
+	}
+	
+	public String readTextFromFile()
+	{
+		String fileText = "";
+		String filePath = "C:/Saved Chats/";
+		String fileName = "Text.txt";
+		File inputFile = new File(fileName);
+		
+		try
+		{
+			Scanner fileScanner = new Scanner(inputFile);
+			
+			while(fileScanner.hasNext())
+			{
+				fileText += fileScanner.nextLine() + "\n";
+			}
+			
+			fileScanner.close();
+		}
+		catch(FileNotFoundException fileException)
+		{
+			JOptionPane.showMessageDialog(appFrame, "IT'S NOT WORKING");
+		}
+		
+		return fileText;
+	}
 }
